@@ -5,6 +5,29 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 
+{% comment %} free sample/ remove jquery {% endcomment %}
+{% comment %} all sample parts: 457,  249,273=> odd {% if item.price == 0 %}hide{% endif %} to classes of quantity selectors {% endcomment %}
+{{ 'jquery-3.7.0.min.js' | asset_url | script_tag }}
+{{ 'cart-sample.js' | asset_url | script_tag }}
+<style>
+  .Sample__text{
+    display: flex;
+  }
+  .hide {
+    display: none;
+  }
+  .button--sample{
+    background-color: rgb(18 18 18 / 54%);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0;
+    min-height: 3rem;
+    display: inline;
+    margin-left: 20px;
+  }
+</style>
+{% comment %} end {% endcomment %}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -241,7 +264,7 @@
                               </button>
                             {%- endif -%}
                             <quantity-input class="quantity cart-quantity">
-                              <button class="quantity__button no-js-hidden" name="minus" type="button">
+                              <button class="quantity__button no-js-hidden {% if item.price == 0 %}hide{% endif %}" name="minus" type="button">
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                                 </span>
@@ -265,7 +288,7 @@
                                 id="Quantity-{{ item.index | plus: 1 }}"
                                 data-index="{{ item.index | plus: 1 }}"
                               >
-                              <button class="quantity__button no-js-hidden" name="plus" type="button">
+                              <button class="quantity__button no-js-hidden {% if item.price == 0 %}hide{% endif %}" name="plus" type="button">
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                                 </span>
@@ -449,6 +472,26 @@
     </form>
   </div>
 </cart-items>
+{% comment %} sample {% endcomment %}
+<div class="drawer__footer">
+  <div id="Sample__info" class="page-width">
+    <div class="Sample__text">
+      {% if cart.total_price < 20000 %}
+        {% assign freeSum = cart.total_price | minus: 20000 | abs %}
+        <span> Add products for {{ freeSum | money_with_currency }} to get free sample. </span>
+      {% else %}
+      <span> You can add free sample to cart! </span>
+      <!-- This is form for funcionality of choosing sample in future, id for product without variants/hacky but it's shopify thing, product.variants.first.id-->
+      <form method="post" action="/cart/add" id="AddSample">
+        <input type="hidden" name="id" value="42008165122184" />
+        <input min="1" type="hidden" id="quantity" name="quantity" value="1"/>
+        <input type="submit" value="Add Sample" class="button button--sample" />
+      </form>
+      {% endif %}
+    </div>
+
+</div>
+</div>
 
 {% schema %}
 {

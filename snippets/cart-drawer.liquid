@@ -448,6 +448,20 @@
         </form>
       </cart-drawer-items>
       <div class="drawer__footer">
+        {% comment %} sample {% endcomment %}
+        <div id="Sample__info">
+            
+          <span class="Sample__text">
+            {% assign freeSum = cart.total_price | minus: 20000 %}
+            {% if freeSum < 0 %}
+             Add products for <span id="Sample__sum">{{ freeSum | money_with_currency }}</span> to get free sample.
+            {% else %}
+            <span> You can add <a href="/cart" >free sample</a> to cart! </span>
+            {% endif %}
+          </span>
+        
+      </div> 
+      
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
             <summary>
