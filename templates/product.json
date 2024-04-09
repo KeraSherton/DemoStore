@@ -23,7 +23,8 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button"
+            "picker_type": "button",
+            "swatch_shape": "circle"
           }
         },
         "3b330e33-4b25-4201-b2cd-dc3222c2ada8": {
@@ -82,6 +83,12 @@
             "content": "",
             "page": ""
           }
+        },
+        "custom_liquid_WNgjFL": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{{ product.variants.first.id }}"
+          }
         }
       },
       "block_order": [
@@ -96,10 +103,12 @@
         "share",
         "ded27690-3795-494c-b90c-f0418c75d589",
         "a767e622-de65-4043-b0b3-23d9c00f99ed",
-        "ed9a600e-f5e3-4f8b-937f-3f5a3f998bde"
+        "ed9a600e-f5e3-4f8b-937f-3f5a3f998bde",
+        "custom_liquid_WNgjFL"
       ],
       "settings": {
         "enable_sticky_info": true,
+        "color_scheme": "",
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "cover",
