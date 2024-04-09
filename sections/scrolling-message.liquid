@@ -1,0 +1,108 @@
+{%- if section.blocks.size > 0 -%}
+  {{ 'section-scrolling-message.css' | asset_url | stylesheet_tag }}
+
+  {%- capture messages_html -%}
+    {%- for block in section.blocks -%}
+      <li class="scrolling-message__item">
+        {{ block.settings.text }}
+      </li>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  <div class="scrolling-message__container color-{{ section.settings.color_scheme }}">
+    <ul class="scrolling-message__list">
+      {%- for i in (0..3) -%}
+        {{ messages_html }}
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <script>
+    function startInfiniteScroll() {
+      const messageList = document.querySelector('.scrolling-message__list');
+      if (!messageList) return;
+      
+      let position = 0;
+      let speed = {{ section.settings.speed_desktop }};
+      (window.innerWidth <= 1000) && (speed = {{ section.settings.speed_tablet }});
+      (window.innerWidth <= 500) && (speed = {{ section.settings.speed_mobile }});
+  
+      const animate = () => {
+        const firstItemWidth = messageList.children[0].offsetWidth;
+        if (position <= -firstItemWidth) {
+          messageList.appendChild(messageList.children[0]);
+          position += firstItemWidth;
+        }
+        position -= speed;
+        messageList.style.transform = `translateX(${position}px)`;
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+    document.addEventListener('DOMContentLoaded', startInfiniteScroll);
+  </script>
+{%- endif - %}
+
+{% schema %}
+{
+  "name": "Scrolling message",
+  "max_blocks": 6,
+  "class": "scrolling-message",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "accent-1"
+    },
+    {
+      "type": "range",
+      "id": "speed_desktop",
+      "min": 0.2,
+      "max": 5,
+      "step": 0.2,
+      "label": "Scroll speed (desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "speed_tablet",
+      "min": 0.2,
+      "max": 5,
+      "step": 0.2,
+      "label": "Scroll speed (tablet)",
+      "default": 2.4
+    },
+    {
+      "type": "range",
+      "id": "speed_mobile",
+      "min": 0.2,
+      "max": 5,
+      "step": 0.2,
+      "label": "Scroll speed (mobile)",
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Message",
+          "default": "Welcome to our store"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling message",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

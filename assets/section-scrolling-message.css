@@ -1,0 +1,51 @@
+.scrolling-message__container {
+  position: relative;
+  width: 100%;
+  color: #9eff00;
+  background-color: var(--gradient-background, #000);
+  overflow: hidden;
+}
+
+.scrolling-message__list {
+  position: relative;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 24px 0;
+  white-space: nowrap;
+  transform: translateX(0);
+  will-change: transform;
+}
+
+.scrolling-message__item {
+  font-family: "Monument Grotesk";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+  padding: 0;
+}
+
+.scrolling-message__item::after {
+  content: '•';
+  margin: 0 5px 0 4px;
+}
+
+@media screen and (min-width: 1000px) {
+  .scrolling-message__list {
+    padding: 20px 0;
+  }
+
+  .scrolling-message__item {
+    font-size: 36px;
+    letter-spacing: -0.5px;
+  }
+
+  .scrolling-message__item::after {
+    margin: 0 10px 0 7px;
+  }
+}
