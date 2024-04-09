@@ -6,8 +6,8 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 
 {% comment %} free sample/ remove jquery {% endcomment %}
-{% comment %} all sample parts: 457,  249,273=> odd {% if item.price == 0 %}hide{% endif %} to classes of quantity selectors {% endcomment %}
-{{ 'jquery-3.7.0.min.js' | asset_url | script_tag }}
+{% comment %} all sample parts: 457,  249,273=> odd {% if item.price == 0 %}hide{% endif %} to classes of quantity selectors, and 103 {% if item.price == 0 %}free{% endif %}{% endcomment %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 {{ 'cart-sample.js' | asset_url | script_tag }}
 <style>
   .Sample__text{
@@ -102,7 +102,7 @@
 
               <tbody>
                 {%- for item in cart.items -%}
-                  <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
+                  <tr class="cart-item {% if item.price == 0 %}free{% endif %}" id="CartItem-{{ item.index | plus: 1 }}">
                     <td class="cart-item__media">
                       {% if item.image %}
                         {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
