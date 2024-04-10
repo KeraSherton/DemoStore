@@ -1,0 +1,35 @@
+<div class="sr__product-card">
+    <div class="sr__img-box">
+        <div class="sr_img">
+            <img
+                srcset="
+                  {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                  {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+                "
+                src="{{ card_product.featured_media | image_url: width: 165 }}"
+                alt="{{ card_product.featured_media.alt | escape }}"
+                loading="lazy"
+                width="100%"
+                height="auto"
+              >
+              </div>
+        {%  if card_product.compare_at_price > card_product.price and card_product.available %}
+            <span class="sr__badge"> </span>
+        {% endif %}
+    </div>
+    <div class="sr__descr">
+        <div class="sr__revievs">yotpo or native?</div>
+        <div class="sr__prod-title">{{ card_product.title }}</div>
+        <div class="sr__prod-short-desc">{{ card_product.metafields.custom.short-desc }}</div>
+        <div class="sr__prod-price">
+            {%  if card_product.compare_at_price > card_product.price %}
+                <span class="sr__prod-promo-price">{{ card_product.price | money }} </span>
+                <span class="sr__prod-old-price">{{ card_product.compare_at_price | money }}</span>
+            {%  else %}
+                <span class="sr__prod-promo-price">{{ card_product.price | money }} </span>
+            {%  endif %}
+        </div>
+    </div>
+</div> 

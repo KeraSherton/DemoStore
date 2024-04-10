@@ -1,1 +1,68 @@
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 {{ 'section-recommend-slider.css' | asset_url | stylesheet_tag }}
+
+{% liquid 
+    assign prod_collection = nill
+    assign recommend_products = collections["oils"].products
+ %}
+
+<div class="sr__page-width">
+    <div class="sr__slider">
+        <swiper-container>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {%  for rec_product in recommend_products %}
+                        <div class="swiper-slide">
+                            {% render 'sr-product-card',
+                                card_product: rec_product %}
+                            </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </swiper-container>
+    </div>
+
+</div>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        loop: false,
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+              slidesPerView: 4,
+              spaceBetween: 24
+            }
+        },
+        preloadImages: false,
+        lazy: true,
+        lazyPreloadPrevNext: 1,
+        keyboard: true,
+    
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      });
+</script>
+{% schema %}
+{
+  "name": "Recommendation slider",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [],
+  "presets": [
+    {
+      "name": "Recommendation slider"
+    }
+  ]
+}
+{% endschema %}
