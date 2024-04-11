@@ -150,15 +150,15 @@
     "recommend_slider_TC6XC6": {
       "type": "recommend-slider",
       "settings": {
-        "title": "Polecane dla Ciebie",
+        "title": "Polecane dla Ciebie nr 1",
         "cta": "Zobacz wszystkie"
       }
     },
     "recommend_slider_2_qkQqX7": {
       "type": "recommend-slider-2",
       "settings": {
-        "title": "",
-        "cta": ""
+        "title": "Polecane dla Ciebie nr 2",
+        "cta": "Zobacz wszystkie"
       }
     },
     "17128258754ef2c8e2": {
