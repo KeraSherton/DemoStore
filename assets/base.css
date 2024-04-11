@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi-Medium.woff2") format("woff2"), url("Satoshi-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi Bold";
+  src: url("Satoshi-Bold.woff2") format("woff2"), url("Satoshi-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
@@ -476,7 +492,7 @@ table:not([class]) th {
   opacity: 0.7;
 }
 
-a:empty,
+/* a:empty,
 ul:empty,
 dl:empty,
 div:empty,
@@ -490,7 +506,7 @@ h4:empty,
 h5:empty,
 h6:empty {
   display: none;
-}
+} */
 
 .link,
 .customer a {

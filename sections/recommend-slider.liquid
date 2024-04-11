@@ -1,0 +1,96 @@
+<script src="{{ 'swiper.min.js' | asset_url }}"></script>
+{{ 'swiper.css' | asset_url | stylesheet_tag }}
+{{ 'section-recommend-slider.css' | asset_url | stylesheet_tag }}
+
+
+{% liquid 
+    assign prod_collection = nill
+    for tag in product.tags
+        if tag contains "r_"
+            assign prod_tag = tag
+        endif
+    endfor
+    assign recommend_products = collections["bestsellers"]
+ %}
+
+
+
+<div class="sr__page-width">
+    {%  if section.settings.title != blank %}
+        <div class="sr__title">{{  section.settings.title }}</div>
+    {%  endif %}
+    <div class="sr__slider">
+        <swiper-container>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {% assign counter = 0 %}
+                    {% paginate recommend_products.products by 1000 %}
+                        {%  for rec_product in recommend_products.products %}
+                            {%  if rec_product.tags contains prod_tag and counter < 10 %}
+                                <div class="swiper-slide">
+                                {% render 'sr-product-card',
+                                    card_product: rec_product %}
+                                </div>
+                                {% assign counter = counter | plus: 1 %}
+                            {%  endif %}
+                        {% endfor %}
+                    {% endpaginate %}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </swiper-container>
+    </div>
+    {%  if section.settings.cta != blank %}
+        <div class="sr__cta"> <a href='/collections/bestsellers/{{ prod_tag }}'> {{ section.settings.cta }} </a> </div>
+    {%  endif %}
+</div>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+        loop: false,
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+              slidesPerView: 4.2,
+              spaceBetween: 24
+            }
+        },
+        preloadImages: false,
+        lazy: true,
+        lazyPreloadPrevNext: 1,
+        keyboard: true,
+    
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      });
+</script>
+{% schema %}
+{
+  "name": "Recommendation slider",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Section title"
+    },
+    {
+        "type": "text",
+        "id": "cta",
+        "label": "CTA text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recommendation slider"
+    }
+  ]
+}
+{% endschema %}

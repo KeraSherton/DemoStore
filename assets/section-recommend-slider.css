@@ -1,0 +1,155 @@
+.sr__page-width{
+   width: 100%;
+   padding: 100px;
+   overflow: hidden;  
+   font-family: "Satoshi";
+   color: #000;
+   position: relative;
+}
+.sr__page-width a{
+    color: #000;
+    text-decoration: none;
+}
+.sr__slider{
+    position: relative;
+}
+.sr__title{
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    padding-bottom: 50px;
+}
+.sr__product-card{
+    padding-bottom: 35px;
+}
+.sr__img-box{
+    position: relative;
+}
+.sr_img{
+    width: 100%;
+    height: 0;
+    padding-bottom: 133%;
+}
+
+.sr_img img{
+    width: 100%;
+}
+
+.sr__badge{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.sr__badge--promo{
+    background-color: #E35249;
+    color: #fff
+}
+.sr__badge--sold{
+    background-color: #7f7f7f;
+    color: #000;
+}
+.sr__descr{
+
+}
+.sr__revievs{
+    padding-top: 20px;
+}
+.sr__prod-title{
+    font-size: 20px;
+    line-height: 1.14em;
+    letter-spacing: -.02em;
+    padding-top: 8px;
+    padding-bottom: 12px;
+}
+.sr__prod-short-desc{
+    font-size: 13px;
+    line-height: 120%;
+    letter-spacing: -.02em;
+}
+.sr__prod-price{
+    position: absolute;
+    bottom: 0;
+}
+.sr__prod-promo-price{
+    font-family: "Satoshi Bold";
+    font-size: 16px;
+    line-height: 1.2em;
+    letter-spacing: 0;
+}
+.sr__prod-old-price{
+    font-size: 15px;
+    line-height: 1.2em;
+    letter-spacing: 0;
+    text-decoration: line-through;
+    color: #5B5B5B;
+}
+.sr__cta{
+    position: absolute;
+    right: 100px;
+    top: 100px;
+ }
+ .sr__cta a{
+    background-color: #000;
+    color: #fff;
+    padding: 19px 21px 19px 19px;
+    text-transform: uppercase;
+    font-family: "Satoshi Bold";
+    font-size: 12px;
+    line-height: 1.2em;
+    letter-spacing: .13em;
+ }
+
+
+@media screen and (max-width: 750px) {
+    .sr__page-width{
+        padding: 16px;
+     }
+     .sr__cta{
+        position: static;
+        margin-top: 64px;
+     }
+     .sr__title{
+        font-size: 36px;
+        padding-bottom: 32px;
+     }
+}
+
+
+
+/* swiper alterations */
+.swiper{
+    overflow: unset;
+}
+.swiper-slide{
+    height: unset;
+    min-height: 100%;
+}
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{
+    display: none;
+}
+
+.swiper-button-next, .swiper-button-prev{
+    width: 64px;
+    height: 64px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 27.5%;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+/* yotpo */
+.yotpo-bottomline .text-m{
+    display: none;
+}
+.yotpo-icon-half-star, .yotpo-icon-empty-star{
+    color: #D9D9D9;
+}
