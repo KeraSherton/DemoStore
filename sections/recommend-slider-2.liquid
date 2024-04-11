@@ -1,63 +1,65 @@
-<script src="{{ 'swiper.min.js' | asset_url }}"></script>
-{{ 'swiper.css' | asset_url | stylesheet_tag }}
-{{ 'section-recommend-slider.css' | asset_url | stylesheet_tag }}
-
-
 {% liquid 
     assign prod_collection = product.type | handleize
     assign recommend_products = collections[prod_collection]
- %}
+    assign limit = section.settings.limit
+%}
 
 
+{% if recommend_products != blank %}
+    <script src="{{ 'swiper.min.js' | asset_url }}"></script>
+    {{ 'swiper.css' | asset_url | stylesheet_tag }}
+    {{ 'section-recommend-slider.css' | asset_url | stylesheet_tag }}
 
-<div class="sr__page-width">
-    {%  if section.settings.title != blank %}
-        <div class="sr__title">{{  section.settings.title }}</div>
-    {%  endif %}
-    <div class="sr__slider">
-        <swiper-container>
-            <div class="swiper2">
-                <div class="swiper-wrapper">
-                    {%  for rec_product in recommend_products.products limit: 10 %} 
-                        <div class="swiper-slide">
-                            {% render 'sr-product-card',
-                            card_product: rec_product %}
-                        </div>
-                    {% endfor %}
+    <div class="sr__page-width">
+        {%  if section.settings.title != blank %}
+            <div class="sr__title">{{  section.settings.title }}</div>
+        {%  endif %}
+        <div class="sr__slider">
+            <swiper-container>
+                <div class="swiper2">
+                    <div class="swiper-wrapper">
+                        {%  for rec_product in recommend_products.products limit: limit %} 
+                            <div class="swiper-slide">
+                                {% render 'sr-product-card',
+                                card_product: rec_product %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </swiper-container>
+            </swiper-container>
+        </div>
+        {%  if section.settings.cta != blank %}
+            <div class="sr__cta"> <a href='/collections/prod_collection'> {{ section.settings.cta }} </a> </div>
+        {%  endif %}
     </div>
-    {%  if section.settings.cta != blank %}
-        <div class="sr__cta"> <a href='/collections/prod_collection'> {{ section.settings.cta }} </a> </div>
-    {%  endif %}
-</div>
 
-<script>
-    const swiper2 = new Swiper('.swiper2', {
-        loop: false,
-        slidesPerView: 1.2,
-        spaceBetween: 16,
-        breakpoints: {
-            640: {
-              slidesPerView: 4.2,
-              spaceBetween: 24
+    <script>
+        const swiper2 = new Swiper('.swiper2', {
+            loop: false,
+            slidesPerView: 1.2,
+            spaceBetween: 16,
+            breakpoints: {
+                640: {
+                slidesPerView: 4.2,
+                spaceBetween: 24
+                }
+            },
+            preloadImages: false,
+            lazy: true,
+            lazyPreloadPrevNext: 1,
+            keyboard: true,
+        
+            // Navigation arrows
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
             }
-        },
-        preloadImages: false,
-        lazy: true,
-        lazyPreloadPrevNext: 1,
-        keyboard: true,
-    
-        // Navigation arrows
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }
-      });
-</script>
+        });
+    </script>
+{%  endif  %}
+
 {% schema %}
 {
   "name": "Recommendation slider 2",
@@ -74,6 +76,15 @@
         "type": "text",
         "id": "cta",
         "label": "CTA text"
+    },
+    {
+        "type": "range",
+        "id": "limit",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "label": "Number of products",
+        "default": 10
     }
   ],
   "presets": [
