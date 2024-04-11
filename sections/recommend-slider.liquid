@@ -34,7 +34,7 @@
                         {% paginate recommend_products.products by 1000 %}
                             {%  for rec_product in recommend_products.products %}
                                 {%  if rec_product.tags contains prod_tag and counter < limit %}
-                                    <div class="swiper-slide">
+                                    <div class="swiper-slide" lazy="true">
                                         {% render 'sr-product-card',
                                             card_product: rec_product %}
                                     </div>
@@ -59,7 +59,7 @@
             slidesPerView: 1.2,
             spaceBetween: 16,
             breakpoints: {
-                640: {
+                990: {
                 slidesPerView: 4.2,
                 spaceBetween: 24
                 }
